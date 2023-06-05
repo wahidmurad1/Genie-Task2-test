@@ -1,5 +1,7 @@
+import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:genie_task/const/global_variable.dart';
 import 'package:genie_task/const/suggestion.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -12,8 +14,9 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   late final TextEditingController _searchTextController;
   late final FocusNode focusNode;
+  int tag=0;
   bool isIconVisible = false;
-
+  //GlobalVariables globalvariables = GlobalVariables();
 
 
   @override
@@ -38,6 +41,16 @@ class _SearchScreenState extends State<SearchScreen> {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: TextField(
+        onSubmitted: (value){
+          globalvariables.addData(value);
+          if(globalvariables.options.isNotEmpty){
+            globalvariables.isVisible = true;
+            _searchTextController.clear();
+          }
+            else{
+              globalvariables.isVisible = false;
+          }
+        },
         focusNode: focusNode,
         controller: _searchTextController,
         style: TextStyle(color: Colors.black),
