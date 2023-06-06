@@ -1,10 +1,7 @@
-import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:genie_task/const/global_variable.dart';
 import 'package:genie_task/const/search_screen.dart';
-import 'package:genie_task/const/suggestion.dart';
-import 'package:genie_task/const/suggestion2.dart';
-import 'package:genie_task/screens/available_shift.dart';
+// import 'package:genie_task/screens/available_shift.dart';
 import 'package:genie_task/screens/available_shift2.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchTextController = TextEditingController();
   // final FocusNode focusNode = FocusNode();
-  int val = 3;
+  int val = 0;
   bool isIconVisible = false;
   @override
   void initState() {
@@ -60,39 +57,46 @@ class _HomeScreenState extends State<HomeScreen> {
                   SearchScreen(
                     icon: Icons.close,
                     searchTextController: _searchTextController,
-                    onSubmit: (value) {
-                      // if (_searchTextController.text.isEmpty)
-                      //   Visibility(
-                      //     visible: globalvariables.isVisible = false,
-                      //     child: Wrap(
-                      //       direction: Axis.horizontal,
-                      //       children: [
-                      //         Icon(
-                      //           Icons.close,
-                      //           size: 18,
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   );
-                      globalvariables.addData(value);
+                    isIconVisible: isIconVisible,
+                    onPressed: () {
+                      isSearching = false;
                       setState(() {
-                        // print(globalvariables.options[0]);
                         _searchTextController.clear();
-                        if (globalvariables.options.isNotEmpty) {
-                          globalvariables.isVisible = true;
-                        }
-                        // if (globalvariables.options.isNotEmpty) {
-                        //   globalvariables.ReplaceData(value);
-                        //   globalvariables.isVisible = true;
-                        // }
-                        //  else if (globalvariables.options.isNotEmpty) {
-                        //     globalvariables.addData('Clear');
-                        //     globalvariables.options.clear();
-                        //   }
-                        else {
-                          globalvariables.isVisible = false;
-                        }
+                        isIconVisible = false;
+                        globalvariables.foundUsers = globalvariables.allUser;
+                        // globalvariables.isIconVisible = false;
+                        //isIconVisible=false;
                       });
+                    },
+                    onChanged: (v) {
+                      globalvariables.runFilter(_searchTextController.text);
+                      if (v.toString().trim() == '') {
+                        setState(() {
+                          isIconVisible = false;
+                          // globalvariables.foundUsers = globalvariables.allUser;
+                        });
+                      } else if (v.isNotEmpty) {
+                        setState(() {
+                          isIconVisible = true;
+                        });
+                      } else {
+                        setState(() {
+                          isIconVisible = false;
+                          globalvariables.foundUsers = globalvariables.allUser;
+                        });
+                      }
+                    },
+                    onSubmit: (value) {
+                      globalvariables.runFilter(_searchTextController.text);
+                      globalvariables.addData(value);
+                      _searchTextController.clear();
+                      isIconVisible = false;
+                      if (globalvariables.options.isNotEmpty) {
+                        globalvariables.isVisible = true;
+                      } else {
+                        globalvariables.isVisible = false;
+                      }
+                      setState(() {});
                     },
                   ),
                   const SizedBox(
@@ -155,9 +159,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: InkWell(
                                       onTap: () {
                                         setState(() {
-                                          // globalvariables.options.clear();
                                           globalvariables.options.removeAt(i);
-                                          //globalvariables.isVisible = false;
+                                          globalvariables.foundUsers =
+                                              globalvariables.allUser;
                                         });
                                       },
                                       child: CircleAvatar(
@@ -203,6 +207,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       setState(() {
                                         globalvariables.options.clear();
+                                        globalvariables.foundUsers =
+                                            globalvariables.allUser;
                                         // globalvariables.options.removeAt(i);
                                         //globalvariables.isVisible = false;
                                       });
@@ -231,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 16, top: 20),
+                  padding: EdgeInsets.only(left: 16, top: 0),
                   child: Text(
                     'Available Shifts',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -239,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )),
             //Available Shifts UI
             // AvailableShift(),
-            // AvailableShift2(),
+            AvailableShift2(),
           ],
         ),
       ),

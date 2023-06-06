@@ -4,15 +4,22 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:genie_task/const/global_variable.dart';
-import 'package:genie_task/const/suggestion.dart';
 
 class SearchScreen extends StatefulWidget {
   final ValueChanged<String>? onSubmit;
   final TextEditingController searchTextController;
   final IconData? icon;
-  const SearchScreen(
-      {Key? key, this.onSubmit, required this.searchTextController, this.icon})
-      : super(key: key);
+  final VoidCallback onPressed;
+  final isIconVisible;
+  final ValueChanged<String> onChanged;
+  const SearchScreen({
+    Key? key,
+    this.onSubmit,
+    required this.searchTextController,
+    this.icon,
+    required this.onChanged,
+    this.isIconVisible, required this.onPressed,
+  }) : super(key: key);
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -22,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
   // late final TextEditingController _searchTextController;
   // late final FocusNode focusNode;
   int tag = 0;
-  bool isIconVisible = false;
+
   bool isSearching = false;
 
   @override
@@ -39,6 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
           onSubmitted: widget.onSubmit,
           // focusNode: focusNode,
           controller: widget.searchTextController,
+
           style: TextStyle(color: Colors.black),
           autofocus: true,
           textInputAction: TextInputAction.search,
@@ -48,21 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
             // focusNode.unfocus();
             setState(() {});
           },
-          onChanged: (v) {
-            if (v.toString().trim() == '') {
-              setState(() {
-                isIconVisible = false;
-              });
-            } else if (v.isNotEmpty) {
-              setState(() {
-                isIconVisible = true;
-              });
-            } else {
-              setState(() {
-                isIconVisible = false;
-              });
-            }
-          },
+          onChanged: widget.onChanged,
           decoration: InputDecoration(
             //contentPadding: EdgeInsets.only(top: 8, bottom: 12),
             // enabledBorder: OutlineInputBorder.none,
@@ -78,20 +72,14 @@ class _SearchScreenState extends State<SearchScreen> {
             prefixIcon: Icon(
               Icons.search,
             ),
-            suffix: !isIconVisible
+            suffixIcon: !widget.isIconVisible
                 ? null
-                : GestureDetector(
-                    onTap: () {
-                      isSearching = false;
-                      setState(() {
-                        widget.searchTextController.clear();
-                        //isIconVisible=false;
-                      });
-                    },
-                    child: Icon(
+                : IconButton(
+                    onPressed: widget.onPressed,
+                    icon: Icon(
                       widget.icon,
                       size: 18,
-                      color: Colors.red,
+                      color: Colors.black,
                     ),
                   ),
           ),
@@ -101,19 +89,3 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 }
-
-
-//  decoration: const InputDecoration(
-//                             contentPadding: EdgeInsets.only(top: 8, bottom: 12),
-//                             border: InputBorder.none,
-//                             prefixIcon: Icon(
-//                               Icons.search,
-//                               size: 20,
-//                               color: Color(0XFFB7BAC2),
-//                             ),
-//                             hintText: "Search",
-//                             hintStyle: TextStyle(
-//                               fontSize: 15,
-//                               color: Color(0XFFB7BAC2),
-//                             ),
-//                           ),
