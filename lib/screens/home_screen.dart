@@ -15,14 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final TextEditingController _searchTextController;
-  late final FocusNode focusNode;
-  int tag=3;
+  final TextEditingController _searchTextController = TextEditingController();
+  // final FocusNode focusNode = FocusNode();
+  int val = 3;
+  bool isIconVisible = false;
   @override
   void initState() {
     super.initState();
-    _searchTextController = TextEditingController();
-    focusNode = FocusNode();
   }
 
   bool isSearching = false;
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     if (mounted) {
       _searchTextController.dispose();
-      focusNode.dispose();
+      // focusNode.dispose();
     }
     super.dispose();
   }
@@ -53,15 +52,49 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-           
+
             Padding(
               padding: const EdgeInsets.only(left: 10, top: 15, right: 12),
               child: Row(
                 children: [
-                 Container(
-                  width: 300,
-                  height: 40,
-                  child: const SearchScreen()),
+                  SearchScreen(
+                    icon: Icons.close,
+                    searchTextController: _searchTextController,
+                    onSubmit: (value) {
+                      // if (_searchTextController.text.isEmpty)
+                      //   Visibility(
+                      //     visible: globalvariables.isVisible = false,
+                      //     child: Wrap(
+                      //       direction: Axis.horizontal,
+                      //       children: [
+                      //         Icon(
+                      //           Icons.close,
+                      //           size: 18,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   );
+                      globalvariables.addData(value);
+                      setState(() {
+                        // print(globalvariables.options[0]);
+                        _searchTextController.clear();
+                        if (globalvariables.options.isNotEmpty) {
+                          globalvariables.isVisible = true;
+                        }
+                        // if (globalvariables.options.isNotEmpty) {
+                        //   globalvariables.ReplaceData(value);
+                        //   globalvariables.isVisible = true;
+                        // }
+                        //  else if (globalvariables.options.isNotEmpty) {
+                        //     globalvariables.addData('Clear');
+                        //     globalvariables.options.clear();
+                        //   }
+                        else {
+                          globalvariables.isVisible = false;
+                        }
+                      });
+                    },
+                  ),
                   const SizedBox(
                     width: 12,
                   ),
@@ -84,64 +117,124 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            
-             if (globalvariables.options.isNotEmpty)
-            Visibility(
-              visible: globalvariables.isVisible,
-              child: Container(
-                //height: height*0.25,
-                //width: size.width*0.9,
-                child: Wrap(
-                  direction: Axis.horizontal,
-                  children: [
-                    ChipsChoice<int>.single(
-                      value: tag,
-                      onChanged: (val) => setState(() => tag = val),
-                      choiceItems: C2Choice.listFrom<int, String>(
-                        source: globalvariables.options,
-                        value: (i, v) => i,
-                        label: (i, v) => v,
-                        tooltip: (i, v) => v,
-                        delete: (i, v) => () {
-                          setState(() => globalvariables.options.removeAt(i));
-                        },
-                      ),
-                      choiceStyle: C2ChipStyle.outlined(
-                        borderOpacity: 0.3,
-                        borderStyle: BorderStyle.solid,
-                        color: Colors.black,
-                        iconColor: const Color(0xffFF6368),
-                        iconSize: 22,
-                        // selectedStyle: C2ChipStyle.filled(
-                        //     foregroundStyle: const TextStyle(
-                        //         fontSize: 16.8,
-                        //         fontFamily: 'Euclid',
-                        //         color: Colors.white),
-                        //     iconColor: Colors.white,
-                        //     color: const Color(0xffFF6368)),
-                        foregroundStyle: const TextStyle(
-                            fontSize: 16.8,
-                            fontFamily: 'Euclid',
-                            color: Colors.black),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
+            SizedBox(
+              height: 10,
+            ),
+            if (globalvariables.options.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(left: 17),
+                child: Visibility(
+                  visible: globalvariables.isVisible,
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      for (var i = 0; i < globalvariables.options.length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8, bottom: 12),
+                          child: Container(
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(25),
+                                border: Border.all(color: Color(0XFFD1D5DB))),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 5),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // for(var i=1;i<globalvariables.options.length;i++)
+                                  Text(
+                                    globalvariables.options[i],
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 4),
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          // globalvariables.options.clear();
+                                          globalvariables.options.removeAt(i);
+                                          //globalvariables.isVisible = false;
+                                        });
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 10,
+                                        backgroundColor: Colors.red,
+                                        child: Icon(
+                                          Icons.close,
+                                          size: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      wrapped: true,
-                    ),
-                  ],
+                      if (globalvariables.isVisible == true)
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(color: Color(0XFFD1D5DB))),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 5),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                // for(var i=1;i<globalvariables.options.length;i++)
+                                Text(
+                                  'Clear',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white),
+                                ),
+
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 4),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        globalvariables.options.clear();
+                                        // globalvariables.options.removeAt(i);
+                                        //globalvariables.isVisible = false;
+                                      });
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 10,
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        Icons.close,
+                                        size: 14,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-        
-           const Align(
+
+            //chip choice function
+            const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.only(left: 16, top: 20),
                   child: Text(
                     'Available Shifts',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 )),
             //Available Shifts UI
@@ -154,75 +247,41 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-  //  Container(
-  //                     width: size.width * 0.75,
-  //                     height: 40,
-  //                     decoration: BoxDecoration(
-  //                       color: const Color(0XFFF4F7F9),
-  //                       borderRadius: BorderRadius.circular(4),
-  //                       boxShadow: const [
-  //                         BoxShadow(
-  //                           color: Colors.black45,
-  //                           blurRadius: 1,
-  //                           offset: Offset(0, 0),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                     child: InkWell(
-  //                       onTap: () {
-  //                           focusNode.unfocus();
-  //                     Navigator.pop(context);
+
+  // if (globalvariables.options.isNotEmpty)
+  //             Visibility(
+  //               visible: globalvariables.isVisible,
+  //               child: Wrap(
+  //                 direction: Axis.horizontal,
+  //                 children: [
+  //                   ChipsChoice<int>.single(
+  //                     value: tag,
+  //                     onChanged: (val) => setState(() => tag = val),
+  //                     choiceItems: C2Choice.listFrom<int, String>(
+  //                       source: globalvariables.options,
+  //                       value: (i, v) => i,
+  //                       label: (i, v) => (v),
+  //                       tooltip: (i, v) => v,
+  //                       delete: (i, v) => () {
+  //                         setState(() => globalvariables.options.removeAt(i));
   //                       },
-  //                       child: TextField(
-  //                         focusNode: focusNode,
-  //                   controller: _searchTextController,
-  //                   style: TextStyle(color: Colors.black),
-  //                   autofocus: true,
-  //                   textInputAction: TextInputAction.search,
-  //                   keyboardType: TextInputType.text,
-  //                   onEditingComplete: () async {
-  //                     isSearching = true;
-  //                     focusNode.unfocus();
-  //                     setState(() {});
-  //                   },
-                      
-  //                         decoration: const InputDecoration(
-  //                           contentPadding: EdgeInsets.only(top: 8, bottom: 12),
-  //                           border: InputBorder.none,
-  //                           prefixIcon: Icon(
-  //                             Icons.search,
-  //                             size: 20,
-  //                             color: Color(0XFFB7BAC2),
-  //                           ),
-  //                           suffixIcon: Icon(Icons.close,
-  //                           size: 20,
-  //                           ),
-  //                           hintText: "Search",
-  //                           hintStyle: TextStyle(
-  //                             fontSize: 15,
-  //                             color: Color(0XFFB7BAC2),
-  //                           ),
-  //                         ),
-  //                          suffix: Padding(
-  //                       padding: const EdgeInsets.symmetric(horizontal: 5),
-  //                       child: GestureDetector(
-  //                         onTap: () {
-  //                           _searchTextController.clear();
-  //                           focusNode.unfocus();
-  //                           isSearching = false;
-  //                           // searchList =[];
-  //                           // searchList!.clear();
-  //                           setState(() {});
-  //                         },
-  //                         child: const Icon(
-  //                           Icons.close,
-  //                           size: 18,
-  //                           color: Colors.red,
-  //                         ),
+  //                     ),
+  //                     choiceStyle: C2ChipStyle.outlined(
+  //                       borderOpacity: 0.3,
+  //                       borderStyle: BorderStyle.solid,
+  //                       color: Colors.black,
+  //                       iconColor: const Color(0xffFF6368),
+  //                       iconSize: 22,
+  //                       foregroundStyle: const TextStyle(
+  //                           fontSize: 16.8,
+  //                           fontFamily: 'Euclid',
+  //                           color: Colors.black),
+  //                       borderRadius: const BorderRadius.all(
+  //                         Radius.circular(15),
   //                       ),
   //                     ),
-                    
-  //                       ),
-  //                     ),
+  //                     wrapped: true,
   //                   ),
-                   
+  //                 ],
+  //               ),
+  //             ),

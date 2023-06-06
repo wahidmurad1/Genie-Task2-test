@@ -12,16 +12,27 @@ class GlobalVariables {
     "Toyota/ABC827838"
   ];
 
-  List<String> driver = [
-    "Peter Griffin",
-    "Stewie",
-    "Glen Quagmire",
-    "Wahid"
-  ];
+  List<String> driver = ["Peter Griffin", "Stewie", "Glen Quagmire", "dfnds"];
 
   void addData(String newData) {
-    options.add(newData);
+    //options.clear();
+    //options.add(newData);
+    if (newData.toString().trim() != '') {
+      options.add(newData.toString().trim());
+    }
+
+    //print(options[0]);
   }
+
+//Replace data
+  // void ReplaceData(String newData) {
+  //   if (newData.toString().trim() == '') {
+  //     options.clear();
+  //   } else {
+  //     options.clear();
+  //     options.add(newData);
+  //   }
+  // }
 
   void clearData() {
     options.clear();
