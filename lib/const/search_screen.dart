@@ -18,7 +18,8 @@ class SearchScreen extends StatefulWidget {
     required this.searchTextController,
     this.icon,
     required this.onChanged,
-    this.isIconVisible, required this.onPressed,
+    this.isIconVisible,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -37,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: Container(
-        width: 280,
+        width: MediaQuery.of(context).size.width * 0.75,
         height: 40,
         decoration: BoxDecoration(
           border: Border.all(width: 1, color: Color(0XFFD1D5DB)),

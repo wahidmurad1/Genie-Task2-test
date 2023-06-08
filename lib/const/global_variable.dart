@@ -1,9 +1,30 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 class GlobalVariables {
   static final _globalvariables = GlobalVariables._internal();
 
   List<String> options = [];
+  List<String> carNumber = [
+    "Toyota/97-666",
+    "Toyota/122476",
+    "Toyota/552738",
+    "Toyota/ABC827838"
+  ];
+  var radioValue1 = "";
+  var radioValue2 = "";
+  int? groupValue = 0;
+  int? groupValue2 = 0;
+  DateTime ? selectedStartDate;
+  TimeOfDay ? selectedStartTime;
+
+  String startDate = "";
+  String endDate = "";
+  String startTime = "";
+  String endTime = "";
+
+  List<String> driverName = ["Harry", "Piter", "Glen", "Morgan"];
 
   bool isVisible = false;
   List<Map<String, dynamic>> allUser = [
@@ -93,7 +114,7 @@ class GlobalVariables {
   //List<String> driver = ["Peter Griffin", "Stewie", "Glen Quagmire", "dfnds"];
 
   void addData(String newData) {
-    options.clear();
+    //options.clear();
     //options.add(newData);
     if (newData.toString().trim() != '') {
       options.add(newData.toString().trim());

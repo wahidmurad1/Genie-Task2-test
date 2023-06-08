@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:genie_task/const/custom_dialog_box.dart';
 import 'package:genie_task/const/global_variable.dart';
 import 'package:genie_task/const/search_screen.dart';
-// import 'package:genie_task/screens/available_shift.dart';
+import 'package:genie_task/screens/available_shift.dart';
 import 'package:genie_task/screens/available_shift2.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,10 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   // final FocusNode focusNode = FocusNode();
   int val = 0;
   bool isIconVisible = false;
-  @override
-  void initState() {
-    super.initState();
-  }
+  CustomDialogBox customDialogBox = CustomDialogBox();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
   bool isSearching = false;
   @override
@@ -51,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             Padding(
-              padding: const EdgeInsets.only(left: 10, top: 15, right: 12),
+              padding: const EdgeInsets.only(left: 10, top: 15),
               child: Row(
                 children: [
                   SearchScreen(
@@ -104,17 +108,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 16),
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0XFFF89818),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Image.asset(
-                        'assets/images/vector.png',
-                        width: 13,
-                        height: 10,
+                    child: InkWell(
+                      onTap: () {
+                        customDialogBox.filterPopup(context);
+                        //  filterPopup2(context);
+                        // filterPopup3(context);
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: const Color(0XFFF89818),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Image.asset(
+                          'assets/images/vector.png',
+                          width: 13,
+                          height: 10,
+                        ),
                       ),
                     ),
                   ),

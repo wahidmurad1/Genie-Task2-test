@@ -11,8 +11,8 @@ class AvailableShift extends StatefulWidget {
 }
 
 class _AvailableShiftState extends State<AvailableShift> {
-  int groupValue = 3;
-  int groupValue2 = 3;
+  int groupValue = 0;
+  int groupValue2 = 0;
 
   var start;
   var end;
@@ -308,6 +308,7 @@ class _AvailableShiftState extends State<AvailableShift> {
                               ],
                             ),
                           ),
+                         
                           Column(
                             children: [
                               const Align(
@@ -573,7 +574,8 @@ class _AvailableShiftState extends State<AvailableShift> {
                                                                         .white),
                                                               ),
                                                             ),
-                                                          )
+                                                          ),
+                                                        
                                                         ],
                                                       ),
                                                     ],
@@ -600,341 +602,20 @@ class _AvailableShiftState extends State<AvailableShift> {
                               ),
                             ],
                           ),
-                          //Select Driver
-                          Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 16),
-                                  child: Text(
-                                    'Select Driver',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Aminul Islam',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  const Spacer(),
-                                  IconButton(
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return StatefulBuilder(
-                                              builder: (context, setState) {
-                                                return AlertDialog(
-                                                  actions: [
-                                                    Column(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              "Select Driver",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                            const Spacer(),
-                                                            IconButton(
-                                                              onPressed: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                              icon: Icon(
-                                                                Icons.close,
-                                                                size: 16,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              'Aminul Islam',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
-                                                            const Spacer(),
-                                                            Radio(
-                                                              value: 1,
-                                                              groupValue:
-                                                                  groupValue2,
-                                                              activeColor:
-                                                                  Colors.green,
-                                                              onChanged:
-                                                                  (value) {
-                                                                print(value);
-                                                                // setState(() {
-                                                                //   groupValue2 =
-                                                                //       value!;
-                                                                // });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              'Aminul Islam',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
-                                                            const Spacer(),
-                                                            Radio(
-                                                              value: 2,
-                                                              groupValue:
-                                                                  groupValue2,
-                                                              activeColor:
-                                                                  Colors.green,
-                                                              onChanged:
-                                                                  (value) {
-                                                                print(value);
-                                                                // setState(() {
-                                                                //   groupValue2 =
-                                                                //       value!;
-                                                                // });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              'Aminul Islam',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
-                                                            const Spacer(),
-                                                            Radio(
-                                                              value: 3,
-                                                              groupValue:
-                                                                  groupValue2,
-                                                              activeColor:
-                                                                  Colors.green,
-                                                              onChanged:
-                                                                  (value) {
-                                                                print(value);
-                                                                // setState(() {
-                                                                //   groupValue2 =
-                                                                //       value!;
-                                                                // });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              'Aminul Islam',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
-                                                            const Spacer(),
-                                                            Radio(
-                                                              value: 4,
-                                                              groupValue:
-                                                                  groupValue2,
-                                                              activeColor:
-                                                                  Colors.green,
-                                                              onChanged:
-                                                                  (value) {
-                                                                print(value);
-                                                                // setState(() {
-                                                                //   groupValue2 =
-                                                                //       value!;
-                                                                // });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Container(
-                                                          width: 90,
-                                                          height: 30,
-                                                          decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  0XFFF89818),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5)),
-                                                          child: TextButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Text(
-                                                              'Submit',
-                                                              style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          });
-                                    },
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_right,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Container(
-                                    width: 280,
-                                    height: 1,
-                                    color: Color(0XFFD1D5DB),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Container(
-                              width: 100,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: Color(0XFFF89818),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  'Apply',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
+                         
+                         //Select Driver
+                         
                         ],
                       ),
+                   
                     ],
                   );
                 });
               });
+        
         },
 
         //Available Shift ui screen
-        child: Container(
-          height: 71,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-              color: Color(0XFF2257AA),
-            ),
-          ),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8, top: 7),
-                child: Image.asset(
-                  'assets/images/user.png',
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5, left: 12),
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'David Morgan',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          'AA 99 999',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          '11.Jan 2023, 08.00-17:00',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Container(
-                        width: 61,
-                        height: 15,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFF89818),
-                          borderRadius: BorderRadius.circular(4).copyWith(
-                            topLeft: Radius.zero,
-                            bottomLeft: Radius.zero,
-                            bottomRight: Radius.zero,
-                          ),
-                        ),
-                        child: Center(
-                            child: Text(
-                          'Status',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
-                        ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
