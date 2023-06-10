@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:genie_task/const/custom_dialog_box.dart';
 import 'package:genie_task/const/global_variable.dart';
 import 'package:genie_task/const/search_screen.dart';
-import 'package:genie_task/screens/available_shift.dart';
 import 'package:genie_task/screens/available_shift2.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -95,12 +96,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       globalvariables.addData(value);
                       _searchTextController.clear();
                       isIconVisible = false;
+                      
                       if (globalvariables.options.isNotEmpty) {
                         globalvariables.isVisible = true;
                       } else {
                         globalvariables.isVisible = false;
                       }
-                      setState(() {});
+                      setState(() {
+                        // Obx(() => globalvariables.isVisible=false);
+                      });
                     },
                   ),
                   const SizedBox(
@@ -116,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: Container(
                         width: 40,
-                        height: 30,
+                        height: 40,
                         decoration: BoxDecoration(
                           color: const Color(0XFFF89818),
                           borderRadius: BorderRadius.circular(4),

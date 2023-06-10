@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 
 class CustomRadioButton extends StatefulWidget {
   final String titleText;
@@ -34,7 +35,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           //   style: TextStyle(
           //       fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black),
           // ),
-          Row(
+        Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               selectedText(),

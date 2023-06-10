@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class GlobalVariables {
+class GlobalVariables extends GetxController{
   static final _globalvariables = GlobalVariables._internal();
 
   List<String> options = [];
@@ -12,19 +13,24 @@ class GlobalVariables {
     "Toyota/552738",
     "Toyota/ABC827838"
   ];
-  var radioValue1 = "";
-  var radioValue2 = "";
-  int? groupValue = 0;
+  List<String> driverName = [
+    "Harry",
+    "Piter",
+    "Glen",
+    "Morgan"
+    ];
+  var radioValue1 = "".obs;
+  var radioValue2 = "".obs;
+  int? groupValue1 = 0;
   int? groupValue2 = 0;
   DateTime ? selectedStartDate;
   TimeOfDay ? selectedStartTime;
 
-  String startDate = "";
-  String endDate = "";
+  RxString startDate = "".obs;
+  RxString endDate = "".obs;
   String startTime = "";
   String endTime = "";
 
-  List<String> driverName = ["Harry", "Piter", "Glen", "Morgan"];
 
   bool isVisible = false;
   List<Map<String, dynamic>> allUser = [
