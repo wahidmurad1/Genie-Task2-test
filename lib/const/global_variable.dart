@@ -23,13 +23,14 @@ class GlobalVariables extends GetxController{
   var radioValue2 = "".obs;
   int? groupValue1 = 0;
   int? groupValue2 = 0;
-  DateTime ? selectedStartDate;
   TimeOfDay ? selectedStartTime;
 
   RxString startDate = "".obs;
   RxString endDate = "".obs;
-  String startTime = "";
-  String endTime = "";
+  RxString startTime = "".obs;
+  RxString endTime = "".obs;
+  Rx<DateTime> selectedStartDate= Rx<DateTime>(DateTime.now());
+  Rx<DateTime> selectedEndDate = Rx<DateTime>(DateTime.now());
 
 
   bool isVisible = false;
@@ -117,7 +118,7 @@ class GlobalVariables extends GetxController{
   }
   //
 
-  //List<String> driver = ["Peter Griffin", "Stewie", "Glen Quagmire", "dfnds"];
+  //List<String> driver = ["Peter Griffin", , "Glen Quagmire", "dfnds"];
 
   void addData(String newData) {
     //options.clear();
@@ -125,7 +126,7 @@ class GlobalVariables extends GetxController{
     if (newData.toString().trim() != '') {
       options.add(newData.toString().trim());
     }
-
+   //update();
     //print(options[0]);
   }
 

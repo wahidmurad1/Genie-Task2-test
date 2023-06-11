@@ -1,8 +1,7 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:genie_task/const/global_variable.dart';
+import 'package:get/get.dart';
 import 'package:genie_task/const/global_variable.dart';
 
 class CustomDatePicker extends StatefulWidget {
@@ -16,7 +15,7 @@ class CustomDatePicker extends StatefulWidget {
   }) : super(key: key);
 
   var boxTextString;
-  var dateortimepicker;
+  RxString dateortimepicker;
   var dateortime;
   IconData icon;
   bool isInitialDateTime;
@@ -35,27 +34,61 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(7))))),
       onPressed: () async {
-        if (widget.dateortime == "date") {
-          DateTime? pickStartDate = await showDatePicker(
-              context: context,
-              initialDate: globalvariables.selectedStartDate ??
-                  selectedDate ??
-                  DateTime.now(),
-              firstDate: DateTime(2000),
-              lastDate: DateTime(2101));
-          if (pickStartDate != null) {
-            //  globalvariables.tempDate = pickStartDate;
-            setState(() {
-              selectedDate = pickStartDate;
-              if (widget.isInitialDateTime) {
-                globalvariables.selectedStartDate = pickStartDate;
-              }
-              widget.dateortimepicker =
-                  formatDate(pickStartDate, [dd, ".", " ", MM, " ", yyyy]);
-              globalvariables.addData(widget.dateortimepicker);
-            });
+        if (widget.isInitialDateTime==true) {
+          if (widget.dateortime == "date") {
+            DateTime? pickStartDate = await showDatePicker(
+                context: context,
+                initialDate: globalvariables.selectedStartDate.value,
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2101));
+            if (pickStartDate != null) {
+              setState(() {
+                selectedDate = pickStartDate;
+               globalvariables.selectedStartDate.value = pickStartDate;
+               //globalvariables.selectedEndDate.value =  globalvariables.selectedStartDate.value;
+                widget.dateortimepicker.value =
+                    formatDate(pickStartDate, [dd, ".", " ", MM, " ", yyyy]);
+                //globalvariables.selectedEndDate.value = pickStartDate;
+              });
+            }
           }
-        } else if (widget.dateortime == "time") {
+        } 
+        if (widget.isInitialDateTime == false) {
+          if (widget.dateortime == "date") {
+            DateTime? pickEndDate = await showDatePicker(
+                context: context,
+                initialDate: globalvariables.selectedStartDate.value.isAfter(globalvariables.selectedEndDate.value)?globalvariables.selectedStartDate.value:globalvariables.selectedEndDate.value,
+                firstDate: globalvariables.selectedStartDate.value,
+                lastDate: DateTime(2101));
+           // if (pickEndDate.isAfter(globalvariables.selectedStartDate.value)) {
+              setState(() {
+                if(pickEndDate!.isAfter(globalvariables.selectedStartDate.value)){
+                  globalvariables.selectedEndDate.value=pickEndDate;
+                };
+                // globalvariables.selectedEndDate.value = pickEndDate;
+                // print(globalvariables.selectedEndDate.value);
+               // globalvariables.selectedStartDate.value = pickStartDate;
+               //globalvariables.selectedEndDate2.value = globalvariables.selectedEndDate.value;
+               widget.dateortimepicker.value =
+                   formatDate(pickEndDate, [dd, ".", " ", MM, " ", yyyy]);
+              });
+            }
+          }
+       // } 
+        if(globalvariables.selectedEndDate.value.isAfter(globalvariables.selectedStartDate.value)){
+          print("Start data is greater than end data");
+          // setState(() {
+            //globalvariables.selectedEndDate.value="" as DateTime;
+            widget.dateortimepicker="" as RxString;
+          //});
+          
+        }
+        // else if(globalvariables.selectedStartDate.value.isAfter(globalvariables.selectedEndDate.value)){
+        //   setState(() {
+           
+        //   });
+        // }
+        if (widget.dateortime == "time") {
           TimeOfDay? pickTime = await showTimePicker(
               context: context,
               initialTime: globalvariables.selectedStartTime ??
@@ -67,9 +100,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               if (widget.isInitialDateTime) {
                 globalvariables.selectedStartTime = pickTime;
               }
-              widget.dateortimepicker =
+              widget.dateortimepicker.value =
                   '${pickTime.hour.toString()}:${pickTime.minute.toString()}';
-              globalvariables.addData(widget.dateortimepicker);
+              // globalvariables.addData(widget.dateortimepicker);
             });
           }
         }
@@ -77,11 +110,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        //mainAxisSize: MainAxisSize.min,
         children: [
           labelText(),
           Row(
-            //mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               boxText(),
@@ -134,7 +165,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           ));
     } else {
       return Text(
-        widget.dateortimepicker,
+        widget.dateortimepicker.value,
         style: TextStyle(
           fontSize: 14,
           fontFamily: 'Euclid Regular',

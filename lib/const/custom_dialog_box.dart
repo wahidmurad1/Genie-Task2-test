@@ -3,20 +3,26 @@ import 'package:genie_task/const/custom_date_picker.dart';
 import 'package:genie_task/const/custom_radio_button.dart';
 import 'package:genie_task/const/global_variable.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:intl/intl.dart';
+
 
 class CustomDialogBox {
   int groupValue = 0;
   int groupValue2 = 0;
+  // final VoidCallback onPressed;
+
+  // CustomDialogBox(this.onPressed);
+
+  //final VoidCallback onPressed;
   // DateTime dateTime = DateTime.now();
   // DateTime dateTime2 = DateTime.now();
-  filterPopup(context) {
+  filterPopup(context, onPressed) {
+    // final VoidCallback onPressed;
+    // filterPopup(onPressed);
     showDialog(
         context: context,
         builder: (context) {
           // return StatefulBuilder(builder: (context, setState) {
-            return GetBuilder<GlobalVariables>(
+          return GetBuilder<GlobalVariables>(
               init: GlobalVariables(),
               builder: (globalVariables) {
                 return Dialog(
@@ -50,15 +56,15 @@ class CustomDialogBox {
                                 style: TextButton.styleFrom(
                                     padding: EdgeInsets.all(0)),
                                 onPressed: () {
-                                 // setState(() {
-                                    //globalvariables.startDate = "" as RxString;
+                                  // setState(() {
+                                  //globalvariables.startDate = "" as RxString;
                                   //  globalvariables.endDate = "" as RxString ;
                                   //  globalvariables.startTime = "";
                                   //  globalvariables.endTime = "";
-                                    //globalvariables.radioValue1 = "" as RxString;
-                                    //globalvariables.radioValue2 = "";
-                                    //globalvariables.options.clear();
-                                //  });
+                                  //globalvariables.radioValue1 = "" as RxString;
+                                  //globalvariables.radioValue2 = "";
+                                  //globalvariables.options.clear();
+                                  //  });
                                 },
                                 child: Text(
                                   "Clear",
@@ -68,7 +74,7 @@ class CustomDialogBox {
                                       color: Color(0XFFFF6368)),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               IconButton(
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -335,7 +341,8 @@ class CustomDialogBox {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: (MediaQuery.of(context).size.width - 48) / 2,
+                              width:
+                                  (MediaQuery.of(context).size.width - 48) / 2,
                               child: CustomDatePicker(
                                 boxTextString: 'Start Date',
                                 dateortimepicker: globalvariables.startDate,
@@ -344,17 +351,17 @@ class CustomDialogBox {
                                 isInitialDateTime: true,
                               ),
                             ),
-
                             SizedBox(
-                              width: (MediaQuery.of(context).size.width - 48) / 2,
-                              child: 
-                                   CustomDatePicker(
-                                    boxTextString: 'End Date',
-                                    dateortimepicker: globalVariables.endDate.toString(),
-                                    dateortime: "date",
-                                    icon: Icons.date_range_rounded,
-                                    isInitialDateTime: false,
-                                  ),
+                              width:
+                                  (MediaQuery.of(context).size.width - 48) / 2,
+                              child: CustomDatePicker(
+                                boxTextString: 'End Date',
+                                dateortimepicker:
+                                    globalVariables.endDate,
+                                dateortime: "date",
+                                icon: Icons.date_range_rounded,
+                                isInitialDateTime: false,
+                              ),
                             ),
                           ],
                         ),
@@ -362,7 +369,8 @@ class CustomDialogBox {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: (MediaQuery.of(context).size.width - 48) / 2,
+                              width:
+                                  (MediaQuery.of(context).size.width - 48) / 2,
                               child: CustomDatePicker(
                                 boxTextString: 'Start Time',
                                 dateortimepicker: globalvariables.startTime,
@@ -372,7 +380,8 @@ class CustomDialogBox {
                               ),
                             ),
                             SizedBox(
-                              width: (MediaQuery.of(context).size.width - 48) / 2,
+                              width:
+                                  (MediaQuery.of(context).size.width - 48) / 2,
                               child: CustomDatePicker(
                                 boxTextString: 'End Time',
                                 dateortimepicker: globalvariables.endTime,
@@ -384,35 +393,33 @@ class CustomDialogBox {
                           ],
                         ),
 
-                        
                         GetBuilder<GlobalVariables>(
-                          init: GlobalVariables(),
-                          
-                          builder: (globalVariables) {
-                            return CustomRadioButton(
-                              titleText: 'Select Car/License Plate',
-                              selectedText: globalVariables.radioValue1.toString(),
-                              icon: Icons.arrow_forward_ios,
-                              onPressed: () {
-                                filterPopup2(context);
-                              },
-                            );
-                          }
-                        ),
+                            init: GlobalVariables(),
+                            builder: (globalVariables) {
+                              return CustomRadioButton(
+                                titleText: 'Select Car/License Plate',
+                                selectedText:
+                                    globalVariables.radioValue1.toString(),
+                                icon: Icons.arrow_forward_ios,
+                                onPressed: () {
+                                  filterPopup2(context);
+                                },
+                              );
+                            }),
 
                         GetBuilder<GlobalVariables>(
-                          init: GlobalVariables(),
-                          builder: (globalVariables) {
-                            return CustomRadioButton(
-                              titleText: 'Select Driver',
-                              selectedText: globalVariables.radioValue2.toString(),
-                              icon: Icons.arrow_forward_ios,
-                              onPressed: () {
-                               filterPopup3(context);
-                              },
-                            );
-                          }
-                        ),
+                            init: GlobalVariables(),
+                            builder: (globalVariables) {
+                              return CustomRadioButton(
+                                titleText: 'Select Driver',
+                                selectedText:
+                                    globalVariables.radioValue2.toString(),
+                                icon: Icons.arrow_forward_ios,
+                                onPressed: () {
+                                  filterPopup3(context);
+                                },
+                              );
+                            }),
 
                         // const Align(
                         //   //Select car/License plate
@@ -529,28 +536,7 @@ class CustomDialogBox {
                                 color: Color(0XFFF89818),
                                 borderRadius: BorderRadius.circular(5)),
                             child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                //create date and time custom chip
-                                // setState(() {
-                                if (globalvariables.startDate.isNotEmpty) {
-                                  globalvariables.options
-                                      .add(globalvariables.startDate as String);
-                                  globalvariables.isVisible = true;
-                                } else if (globalvariables.endDate.isNotEmpty) {
-                                  globalvariables.options
-                                      .add(globalvariables.endDate as String);
-                                  globalvariables.isVisible = true;
-                                } else if (globalvariables.startTime.isNotEmpty) {
-                                  globalvariables.options
-                                      .add(globalvariables.startTime);
-                                  globalvariables.isVisible = true;
-                                } else if (globalvariables.endTime.isNotEmpty) {
-                                  globalvariables.options
-                                      .add(globalvariables.endTime);
-                                  globalvariables.isVisible = true;
-                                }
-                              },
+                              onPressed: onPressed,
                               child: Center(
                                 child: Text(
                                   'Apply',
@@ -567,10 +553,9 @@ class CustomDialogBox {
                     ),
                   ),
                 );
-              }
-            );
-          });
-       // });
+              });
+        });
+    // });
   }
 }
 
@@ -578,14 +563,14 @@ filterPopup2(context) {
   showDialog(
       context: context,
       builder: (context) {
-      // return StatefulBuilder(builder: (context, setState) {
-         return GetBuilder<GlobalVariables>(
-          init: GlobalVariables(),
+        // return StatefulBuilder(builder: (context, setState) {
+        return GetBuilder<GlobalVariables>(
+            init: GlobalVariables(),
             builder: (globalVariables) {
               return Dialog(
                 backgroundColor: Colors.white,
-                shape:
-                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
                 insetPadding: EdgeInsets.zero,
                 child: Container(
                   width: MediaQuery.of(context).size.width - 32,
@@ -619,8 +604,8 @@ filterPopup2(context) {
                           height: 40,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              border:
-                                  Border.all(color: Color(0XFFD1D5DB), width: 1)),
+                              border: Border.all(
+                                  color: Color(0XFFD1D5DB), width: 1)),
                           child: const TextField(
                             style: TextStyle(color: Colors.black),
                             autofocus: true,
@@ -661,12 +646,13 @@ filterPopup2(context) {
                                       activeColor: Colors.green,
                                       onChanged: (val) {
                                         print(val);
-                                         //setState(() {
-                                          globalvariables.groupValue1 = val as int?;
-                                          globalvariables.radioValue1 =
-                                              RxString(globalvariables
-                                                  .carNumber[(val as int) - 1]);
-                                      //  });
+                                        //setState(() {
+                                        globalvariables.groupValue1 =
+                                            val as int?;
+                                        globalvariables.radioValue1 = RxString(
+                                            globalvariables
+                                                .carNumber[(val as int) - 1]);
+                                        //  });
                                       },
                                     ),
                                   ],
@@ -701,25 +687,23 @@ filterPopup2(context) {
                   ),
                 ),
               );
-            }
-          );
-        });
-      //});
+            });
+      });
+  //});
 }
-
 
 filterPopup3(context) {
   showDialog(
       context: context,
       builder: (context) {
-       // return StatefulBuilder(builder: (context, setState) {
-          return GetBuilder<GlobalVariables>(
+        // return StatefulBuilder(builder: (context, setState) {
+        return GetBuilder<GlobalVariables>(
             init: GlobalVariables(),
             builder: (globalVariables) {
               return Dialog(
                 backgroundColor: Colors.white,
-                shape:
-                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
                 insetPadding: EdgeInsets.zero,
                 child: Container(
                   width: MediaQuery.of(context).size.width - 32,
@@ -768,11 +752,12 @@ filterPopup3(context) {
                                       onChanged: (val) {
                                         print(val);
                                         // setState(() {
-                                          globalVariables.groupValue2 = val as int?;
-                                          globalVariables.radioValue2 =
-                                              RxString(globalVariables
-                                                  .driverName[(val as int) - 1]);
-                                      //  });
+                                        globalVariables.groupValue2 =
+                                            val as int?;
+                                        globalVariables.radioValue2 = RxString(
+                                            globalVariables
+                                                .driverName[(val as int) - 1]);
+                                        //  });
                                       },
                                     ),
                                   ],
@@ -807,9 +792,7 @@ filterPopup3(context) {
                   ),
                 ),
               );
-            }
-          );
-        });
-      //});
+            });
+      });
+  //});
 }
-

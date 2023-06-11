@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       globalvariables.addData(value);
                       _searchTextController.clear();
                       isIconVisible = false;
-                      
+
                       if (globalvariables.options.isNotEmpty) {
                         globalvariables.isVisible = true;
                       } else {
@@ -114,9 +114,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(right: 16),
                     child: InkWell(
                       onTap: () {
-                        customDialogBox.filterPopup(context);
-                        //  filterPopup2(context);
-                        // filterPopup3(context);
+                        customDialogBox.filterPopup(
+                          context,
+                          () {
+                            Navigator.pop(context);
+                            //create date and time custom chip
+                            // setState(() {
+                            print(globalvariables.startDate.value);
+                            print(globalvariables.options);
+                            if (globalvariables.startDate.isNotEmpty) {
+                              globalvariables.options
+                                  .add(globalvariables.startDate.value);
+                              globalvariables.isVisible = true;
+                            }
+                            if (globalvariables.endDate.isNotEmpty) {
+                              globalvariables.options
+                                  .add(globalvariables.endDate.value);
+                              globalvariables.isVisible = true;
+                            }
+                            if (globalvariables.startTime.isNotEmpty) {
+                              globalvariables.options
+                                  .add(globalvariables.startTime.value);
+                              globalvariables.isVisible = true;
+                            }
+                            if (globalvariables.endTime.isNotEmpty) {
+                              globalvariables.options
+                                  .add(globalvariables.endTime.value);
+                              globalvariables.isVisible = true;
+                            }
+                            // globalvariables.startDate.clear;
+                            // globalvariables.endDate.refresh();
+                            // globalvariables.startTime.refresh();
+                            // globalvariables.endTime.refresh();
+                            setState(() {
+                            });
+                          },
+                        );
+              
                       },
                       child: Container(
                         width: 40,
