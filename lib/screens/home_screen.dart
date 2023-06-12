@@ -21,10 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isIconVisible = false;
   CustomDialogBox customDialogBox = CustomDialogBox();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
 
   bool isSearching = false;
   @override
@@ -90,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           globalvariables.foundUsers = globalvariables.allUser;
                         });
                       }
+                      
                     },
                     onSubmit: (value) {
                       globalvariables.runFilter(_searchTextController.text);
@@ -170,6 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            //Custom Chips
             SizedBox(
               height: 10,
             ),
@@ -282,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
+            
             //chip choice function
             const Align(
                 alignment: Alignment.centerLeft,
@@ -299,6 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  
   }
 }
 

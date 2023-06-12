@@ -42,6 +42,7 @@ dependencies:
   chips_choice: ^3.0.0
   date_format: ^2.0.7
   get: ^4.6.5
+  # fluttertoast: 
 
 dev_dependencies:
   flutter_test:

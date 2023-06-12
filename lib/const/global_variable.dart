@@ -3,35 +3,29 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GlobalVariables extends GetxController{
+class GlobalVariables extends GetxController {
   static final _globalvariables = GlobalVariables._internal();
 
-  List<String> options = [];
+  RxList options = RxList([]);
   List<String> carNumber = [
     "Toyota/97-666",
     "Toyota/122476",
     "Toyota/552738",
     "Toyota/ABC827838"
   ];
-  List<String> driverName = [
-    "Harry",
-    "Piter",
-    "Glen",
-    "Morgan"
-    ];
+  List<String> driverName = ["Harry", "Piter", "Glen", "Morgan"];
   var radioValue1 = "".obs;
   var radioValue2 = "".obs;
   int? groupValue1 = 0;
   int? groupValue2 = 0;
-  TimeOfDay ? selectedStartTime;
+  TimeOfDay? selectedStartTime;
 
   RxString startDate = "".obs;
   RxString endDate = "".obs;
   RxString startTime = "".obs;
   RxString endTime = "".obs;
-  Rx<DateTime> selectedStartDate= Rx<DateTime>(DateTime.now());
+  Rx<DateTime> selectedStartDate = Rx<DateTime>(DateTime.now());
   Rx<DateTime> selectedEndDate = Rx<DateTime>(DateTime.now());
-
 
   bool isVisible = false;
   List<Map<String, dynamic>> allUser = [
@@ -65,7 +59,7 @@ class GlobalVariables extends GetxController{
       "number": 'A0/0100',
       "time": '11 June 2023 8:00'
     },
-  ];
+  ].obs;
   //when chip exists and search then search a found list and when clear the list then search same found list if cheap clear then show the full list
   List<Map<String, dynamic>> foundUsers = [];
   List<Map<String, dynamic>> result = [];
@@ -122,11 +116,11 @@ class GlobalVariables extends GetxController{
 
   void addData(String newData) {
     //options.clear();
-    //options.add(newData);
+     options.add(newData);
     if (newData.toString().trim() != '') {
       options.add(newData.toString().trim());
     }
-   //update();
+    //update();
     //print(options[0]);
   }
 

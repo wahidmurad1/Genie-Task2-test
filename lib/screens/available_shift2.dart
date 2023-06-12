@@ -20,10 +20,10 @@ class _AvailableShift2State extends State<AvailableShift2> {
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: ListView.builder(
           itemCount: globalvariables.foundUsers.length,
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8)
@@ -119,6 +119,7 @@ class _AvailableShift2State extends State<AvailableShift2> {
         ),
       ),
     );
+  
   }
 }
 

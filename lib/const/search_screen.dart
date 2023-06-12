@@ -1,9 +1,5 @@
-import 'dart:ui';
-
-import 'package:chips_choice/chips_choice.dart';
+//import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:genie_task/const/global_variable.dart';
 
 class SearchScreen extends StatefulWidget {
   final ValueChanged<String>? onSubmit;
@@ -88,5 +84,6 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
     );
+  
   }
 }
