@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:genie_task/const/global_variable.dart';
 import 'package:genie_task/controller/listView_controller.dart';
 import 'package:genie_task/controller/search_controller.dart';
@@ -29,18 +25,23 @@ class SearchScreen2 extends StatelessWidget {
           () => TextField(
             controller: searchTextController,
             onSubmitted: (value) {
+              globalvariables.addData(value);
+              // globalvariables.isVisible = true;
               // listViewController.runFilter(searchTextController.text);
               searchController.isIconVisible.value = false;
               if (globalvariables.options.isNotEmpty) {
-                globalvariables.addData(value);
+                // globalvariables.isVisible = true;
+                //searchController.isIconVisible.value = true;
+                listViewController.runFilter(value);
                 searchTextController.clear();
-                globalvariables.isVisible = true;
-                searchController.isIconVisible.value = true;
-                listViewController.runFilter(value);
+                print("Value not empty");
               } else {
-                globalvariables.isVisible = false;
+                //globalvariables.isVisible = false;
                 // globalvariables.foundUsers = globalvariables.allUser;
-                listViewController.runFilter(value);
+                //listViewController.runFilter(value);
+                print("Value empty");
+
+                //listViewController.runFilter(value);
               }
             },
             onChanged: (v) {
@@ -50,7 +51,7 @@ class SearchScreen2 extends StatelessWidget {
                 listViewController.runFilter(v);
                 // globalvariables.foundUsers = globalvariables.allUser;
               } else if (v.isNotEmpty) {
-                print("Not empty here");
+                // print("Not empty here");
                 listViewController.runFilter(v);
                 searchController.isIconVisible.value = true;
               } else {
@@ -82,8 +83,13 @@ class SearchScreen2 extends StatelessWidget {
                       onPressed: () {
                         searchTextController.clear();
                         searchController.isIconVisible.value = false;
-                        listViewController.foundUsers.value =
-                            globalvariables.allUser;
+                        if (globalvariables.options.isNotEmpty) {
+                          listViewController.foundUsers.value =
+                              listViewController.foundUsers.value;
+                        } else {
+                          listViewController.foundUsers.value =
+                              globalvariables.allUser;
+                        }
                       },
                       icon: Icon(
                         Icons.close,

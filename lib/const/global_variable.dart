@@ -116,11 +116,11 @@ class GlobalVariables extends GetxController {
 
   void addData(String newData) {
     //options.clear();
-     options.add(newData);
+    //options.add(newData);
     if (newData.toString().trim() != '') {
       options.add(newData.toString().trim());
     }
-    //update();
+    update();
     //print(options[0]);
   }
 

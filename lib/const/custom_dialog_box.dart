@@ -8,16 +8,7 @@ import 'package:get/get.dart';
 class CustomDialogBox {
   int groupValue = 0;
   int groupValue2 = 0;
-  // final VoidCallback onPressed;
-
-  // CustomDialogBox(this.onPressed);
-
-  //final VoidCallback onPressed;
-  // DateTime dateTime = DateTime.now();
-  // DateTime dateTime2 = DateTime.now();
   filterPopup(context, onPressed) {
-    // final VoidCallback onPressed;
-    // filterPopup(onPressed);
     showDialog(
         context: context,
         builder: (context) {
@@ -421,113 +412,7 @@ class CustomDialogBox {
                               );
                             }),
 
-                        // const Align(
-                        //   //Select car/License plate
-                        //   alignment: Alignment.topLeft,
-                        //   child: Padding(
-                        //     padding: EdgeInsets.only(top: 16, left: 8),
-                        //     child: Text(
-                        //       'Select car/License plate',
-                        //       style: TextStyle(
-                        //           fontSize: 10, fontWeight: FontWeight.w600),
-                        //     ),
-                        //   ),
-                        // ),
-                        // Column(
-                        //   children: [
-                        //     Padding(
-                        //       padding: const EdgeInsets.only(left: 8),
-                        //       child: InkWell(
-                        //         onTap: () {
-                        //           filterPopup2(context);
-                        //         },
-                        //         child: Row(
-                        //           children: [
-                        //             const Text(
-                        //               'AA 00 000',
-                        //               style: TextStyle(
-                        //                   fontSize: 14,
-                        //                   fontWeight: FontWeight.w400,
-                        //                   color: Colors.black),
-                        //             ),
-                        //             const Spacer(),
-                        //             IconButton(
-                        //               onPressed: () {
-                        //                 filterPopup2(context);
-                        //               },
-                        //               icon: Icon(
-                        //                 Icons.arrow_forward_ios,
-                        //                 size: 16,
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     Padding(
-                        //       padding: const EdgeInsets.only(left: 8, right: 8),
-                        //       child: Container(
-                        //           width: MediaQuery.of(context).size.width,
-                        //           height: 0.5,
-                        //           child: TextField()),
-                        //     ),
-                        //   ],
-                        // ),
-                        // const Align(
-                        //   //Select driver
-                        //   alignment: Alignment.topLeft,
-                        //   child: Padding(
-                        //     padding: EdgeInsets.only(top: 16, left: 8),
-                        //     child: Text(
-                        //       'Select Driver',
-                        //       style: TextStyle(
-                        //           fontSize: 10, fontWeight: FontWeight.w600),
-                        //     ),
-                        //   ),
-                        // ),
-                        // Column(
-                        //   children: [
-                        //     Padding(
-                        //       padding: const EdgeInsets.only(left: 8),
-                        //       child: TextButton(
-                        //         onPressed: () {
-                        //           filterPopup3(context);
-                        //         },
-                        //         child: Row(
-                        //           children: [
-                        //             const Text(
-                        //               'dfhjhdfg',
-                        //               style: TextStyle(
-                        //                   fontSize: 14,
-                        //                   fontWeight: FontWeight.w400,
-                        //                   color: Colors.black),
-                        //             ),
-                        //             const Spacer(),
-                        //             IconButton(
-                        //               onPressed: () {
-                        //                 filterPopup3(context);
-                        //               },
-                        //               icon: Icon(
-                        //                 Icons.arrow_forward_ios,
-                        //                 size: 16,
-                        //                 color: Colors.black,
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     Padding(
-                        //       padding: const EdgeInsets.only(left: 8, right: 8),
-                        //       child: Container(
-                        //           width: MediaQuery.of(context).size.width,
-                        //           height: 0.5,
-                        //           child: TextField()),
-                        //     ),
-                        //   ],
-                        // ),
-
-                        Padding(
+                          Padding(
                           padding: const EdgeInsets.only(bottom: 10, top: 20),
                           child: Container(
                             width: 90,
@@ -558,6 +443,9 @@ class CustomDialogBox {
     // });
   }
 }
+
+
+
 
 filterPopup2(context) {
   showDialog(

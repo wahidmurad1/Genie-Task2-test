@@ -6,14 +6,15 @@ import 'package:genie_task/controller/login_controller.dart';
 import 'package:genie_task/screens2/home_screen2.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
- // bool isLogin = false;
+  // bool isLogin = false;
   //TextEditingController emailController = TextEditingController();
- // TextEditingController passwordController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
 
- LoginController loginController = Get.put(LoginController());
+  LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -154,29 +155,59 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () async{
-                    await loginController.loginUser();
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(top: 25), 
-                    width: 400,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.blue,
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600),
+
+
+
+
+
+
+                Obx(() => TextButton(
+                      onPressed: () async {
+                        // SharedPreferences sharedPreferences =
+                        //     await SharedPreferences.getInstance();
+                        // sharedPreferences.setString(
+                        //     'email', loginController.emailController.text);
+                        // loginController.getValidationData();
+                        loginController.loginUser();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 25),
+                        width: 400,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.blue,
+                        ),
+                        child: Center(
+                          child: loginController.isLoading.value
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'Please Wait...',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                )
+                              : Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    )),
               ],
             ),
           ),
@@ -207,6 +238,4 @@ class LoginScreen extends StatelessWidget {
   //   }
   //  // update();
   // }
-
-
 }

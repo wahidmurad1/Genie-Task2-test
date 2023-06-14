@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class ListViewController extends GetxController {
   GlobalVariables globalVariables = Get.put(GlobalVariables());
-  //RxList findUser = RxList([]);
+  RxList findUser = RxList([]);
   @override
   void onInit() {
     // TODO: implement onInit

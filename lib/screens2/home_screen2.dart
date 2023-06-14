@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:genie_task/const2/custom_chips.dart';
 import 'package:genie_task/const2/search_screen2.dart';
+import 'package:genie_task/controller/listView_controller.dart';
+import 'package:genie_task/controller/login_controller.dart';
 import 'package:genie_task/controller/search_controller.dart';
-import 'package:genie_task/screens/available_shift2.dart';
 import 'package:genie_task/screens2/available_shift.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +11,8 @@ class HomeScreen2 extends StatelessWidget {
   HomeScreen2({Key? key}) : super(key: key);
 
   SearchController searchController = Get.put(SearchController());
+  ListViewController listViewController = Get.put(ListViewController());
+  LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,26 +34,37 @@ class HomeScreen2 extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 16, top: 15, right: 16),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                //Search Screen
                 SearchScreen2(),
+                //pop up 
                 Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Color(0XFFF89818),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+                   width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Color(0XFFF89818),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                   child: TextButton(
-                    onPressed: () {},
-                    child: Image.asset('assets/images/vector.png'),
+                    onPressed: (){
+                     
+                    },
+                        child: Image.asset('assets/images/vector.png'),
+                    
                   ),
                 ),
               ],
             ),
           ),
-          const Align(
+          // Custom chip
+          const SizedBox(
+            height: 10,
+          ),
+          CustomChips(),
+          
+              const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: EdgeInsets.only(left: 16, top: 10),
@@ -61,6 +73,7 @@ class HomeScreen2 extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               )),
+              //ListView Show
           AvailableShift(),
         ],
       ),
